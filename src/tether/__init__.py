@@ -30,6 +30,11 @@ from tether._types import EOF, TIMEOUT, EOF_TYPE, TIMEOUT_TYPE, Pattern
 from tether._spawn import Spawn
 
 
+# Phase 2 — run, screen, interact
+from tether._run import run
+from tether._screen import has_ansi, strip_ansi
+
+
 # Stubs — replaced as phases are implemented.
 
 class AsyncSpawn:
@@ -42,11 +47,6 @@ class PopenSpawn:
 
 class SSHSession:
     """SSH session helper. Stub — see Phase 3."""
-
-
-def run(command: str, *, timeout: float = 30) -> str:
-    """Run a command and return its output. Stub — see Phase 2."""
-    raise NotImplementedError("tether.run() not yet implemented")
 
 
 def spawn(
