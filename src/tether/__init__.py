@@ -9,6 +9,7 @@ __all__ = [
     "PopenSpawn",
     "SSHSession",
     "EOF",
+    "EOFError",
     "TIMEOUT",
     "EOF_TYPE",
     "TIMEOUT_TYPE",
@@ -21,6 +22,7 @@ __all__ = [
 ]
 
 # Foundational types
+from tether._errors import EOF as EOFError
 from tether._errors import ExitStatus, TetherError, Timeout
 from tether._types import EOF, TIMEOUT, EOF_TYPE, TIMEOUT_TYPE, Pattern
 
