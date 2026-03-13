@@ -24,12 +24,11 @@ __all__ = [
 from tether._errors import ExitStatus, TetherError, Timeout
 from tether._types import EOF, TIMEOUT, EOF_TYPE, TIMEOUT_TYPE, Pattern
 
+# Phase 1 — Spawn
+from tether._spawn import Spawn
+
 
 # Stubs — replaced as phases are implemented.
-
-class Spawn:
-    """Process interaction via PTY. Stub — see Phase 1."""
-
 
 class AsyncSpawn:
     """Async process interaction via PTY. Stub — see Phase 3."""
@@ -54,5 +53,5 @@ def spawn(
     timeout: float = 30,
     encoding: str = "utf-8",
 ) -> Spawn:
-    """Spawn a process with PTY. Stub — see Phase 1."""
-    raise NotImplementedError("tether.spawn() not yet implemented")
+    """Spawn a process with PTY."""
+    return Spawn(command, timeout=timeout, encoding=encoding)
