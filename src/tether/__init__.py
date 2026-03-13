@@ -10,22 +10,22 @@ __all__ = [
     "SSHSession",
     "EOF",
     "TIMEOUT",
+    "EOF_TYPE",
+    "TIMEOUT_TYPE",
     "run",
     "spawn",
     "TetherError",
     "Timeout",
+    "ExitStatus",
+    "Pattern",
 ]
+
+# Foundational types
+from tether._errors import ExitStatus, TetherError, Timeout
+from tether._types import EOF, TIMEOUT, EOF_TYPE, TIMEOUT_TYPE, Pattern
 
 
 # Stubs — replaced as phases are implemented.
-
-class TetherError(Exception):
-    """Base exception for tether. Stub — replaced by _errors.py."""
-
-
-class Timeout(TetherError):
-    """Expect timeout. Stub — replaced by _errors.py."""
-
 
 class Spawn:
     """Process interaction via PTY. Stub — see Phase 1."""
@@ -41,31 +41,6 @@ class PopenSpawn:
 
 class SSHSession:
     """SSH session helper. Stub — see Phase 3."""
-
-
-# Sentinel stubs
-class _SentinelType:
-    _instance: _SentinelType | None = None
-    def __new__(cls) -> _SentinelType:
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
-
-class EOF_TYPE(_SentinelType):
-    """EOF sentinel type."""
-    def __repr__(self) -> str:
-        return "EOF"
-
-
-class TIMEOUT_TYPE(_SentinelType):
-    """TIMEOUT sentinel type."""
-    def __repr__(self) -> str:
-        return "TIMEOUT"
-
-
-EOF: EOF_TYPE = EOF_TYPE()
-TIMEOUT: TIMEOUT_TYPE = TIMEOUT_TYPE()
 
 
 def run(command: str, *, timeout: float = 30) -> str:
