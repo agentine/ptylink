@@ -35,18 +35,10 @@ from tether._run import run
 from tether._screen import has_ansi, strip_ansi
 
 
-# Stubs — replaced as phases are implemented.
-
-class AsyncSpawn:
-    """Async process interaction via PTY. Stub — see Phase 3."""
-
-
-class PopenSpawn:
-    """Non-PTY process interaction via pipes. Stub — see Phase 3."""
-
-
-class SSHSession:
-    """SSH session helper. Stub — see Phase 3."""
+# Phase 3 — async, popen, ssh
+from tether._async import AsyncSpawn
+from tether._popen import PopenSpawn
+from tether._ssh import SSHSession
 
 
 def spawn(
