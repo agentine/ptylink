@@ -1,6 +1,8 @@
 # tether
 
 [![CI](https://github.com/agentine/tether/actions/workflows/ci.yml/badge.svg)](https://github.com/agentine/tether/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/tether)](https://pypi.org/project/tether/)
+[![Python](https://img.shields.io/pypi/pyversions/tether)](https://pypi.org/project/tether/)
 
 Modern process interaction library for Python — expect-style automation with PTY support.
 
@@ -131,9 +133,10 @@ with Spawn("some_program") as child:
 
 ## API Reference
 
-### Classes
+### Classes and Functions
 
 - **`Spawn(command, *, timeout=30, encoding='utf-8', env=None, cwd=None)`** — PTY-based process interaction
+- **`spawn(command, *, timeout=30, encoding='utf-8')`** — Factory function; returns a `Spawn` instance
 - **`AsyncSpawn(command, ...)`** — Async version of Spawn
 - **`PopenSpawn(command, ...)`** — Pipe-based (no PTY) process interaction
 - **`SSHSession(server, *, username=None, port=22, password=None)`** — SSH session helper
