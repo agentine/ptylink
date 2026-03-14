@@ -168,7 +168,7 @@ with Spawn("some_program") as child:
 
 ### Exceptions
 
-- `TetherError` — Base exception
+- `PtylinkError` — Base exception
 - `Timeout` — Expect timed out
 - `EOF` — Process closed output
 - `ExitStatus` — Process exited with non-zero status

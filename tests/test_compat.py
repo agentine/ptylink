@@ -6,7 +6,7 @@ import pytest
 
 pexpect = pytest.importorskip("pexpect")
 
-import ptylink.compat as tether_compat  # noqa: E402
+import ptylink.compat as ptylink_compat  # noqa: E402
 from ptylink._spawn import Spawn  # noqa: E402
 
 
@@ -14,32 +14,32 @@ class TestCompatImports:
     """Verify that pexpect-style imports work."""
 
     def test_import_spawn(self) -> None:
-        assert tether_compat.spawn is Spawn
+        assert ptylink_compat.spawn is Spawn
 
     def test_import_run(self) -> None:
-        assert callable(tether_compat.run)
+        assert callable(ptylink_compat.run)
 
     def test_import_eof(self) -> None:
-        assert tether_compat.EOF is not None
+        assert ptylink_compat.EOF is not None
 
     def test_import_timeout(self) -> None:
-        assert tether_compat.TIMEOUT is not None
+        assert ptylink_compat.TIMEOUT is not None
 
     def test_import_exception_pexpect(self) -> None:
-        assert issubclass(tether_compat.ExceptionPexpect, Exception)
+        assert issubclass(ptylink_compat.ExceptionPexpect, Exception)
 
     def test_import_pxssh(self) -> None:
-        assert tether_compat.pxssh is not None
+        assert ptylink_compat.pxssh is not None
 
     def test_compat_spawn_works(self) -> None:
         """spawn from compat module should work like Spawn."""
-        with tether_compat.spawn("echo hello") as child:
+        with ptylink_compat.spawn("echo hello") as child:
             child.expect("hello")
             assert "hello" in child.after
 
     def test_compat_run_works(self) -> None:
         """run from compat module should work."""
-        result = tether_compat.run("echo hello")
+        result = ptylink_compat.run("echo hello")
         assert "hello" in result
 
 
@@ -78,14 +78,14 @@ class TestCrossVerification:
     def test_run_basic(self) -> None:
         """Both run() should return output containing the echoed text."""
         p_result = pexpect.run("echo crosscheck").decode()
-        t_result = tether_compat.run("echo crosscheck")
+        t_result = ptylink_compat.run("echo crosscheck")
         assert "crosscheck" in p_result
         assert "crosscheck" in t_result
 
     def test_run_exit_status(self) -> None:
         """Both should return exit status when requested."""
         p_output, p_status = pexpect.run("sh -c 'exit 3'", withexitstatus=True)
-        t_output, t_status = tether_compat.run("sh -c 'exit 3'", withexitstatus=True)  # type: ignore[misc]
+        t_output, t_status = ptylink_compat.run("sh -c 'exit 3'", withexitstatus=True)  # type: ignore[misc]
         assert p_status == 3
         assert t_status == 3
 
@@ -172,7 +172,7 @@ class TestCrossVerification:
 
     def test_run_with_events(self) -> None:
         """ptylink.run with events should work like pexpect.run."""
-        t_result = tether_compat.run(
+        t_result = ptylink_compat.run(
             "sh -c 'echo Question?; read ans; echo Answer: $ans'",
             events={"Question?": "yes\n"},
         )

@@ -50,9 +50,9 @@ class TestPtyProcessSpawn:
 
     def test_spawn_with_env(self) -> None:
         env = dict(os.environ)
-        env["TETHER_TEST_VAR"] = "hello123"
+        env["PTYLINK_TEST_VAR"] = "hello123"
         proc = PtyProcess.spawn(
-            ["/bin/sh", "-c", "echo $TETHER_TEST_VAR"],
+            ["/bin/sh", "-c", "echo $PTYLINK_TEST_VAR"],
             env=env,
         )
         time.sleep(0.3)

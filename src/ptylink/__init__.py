@@ -15,7 +15,7 @@ __all__ = [
     "TIMEOUT_TYPE",
     "run",
     "spawn",
-    "TetherError",
+    "PtylinkError",
     "Timeout",
     "ExitStatus",
     "Pattern",
@@ -27,7 +27,7 @@ __all__ = [
 # Phase 3 — async, popen, ssh
 from ptylink._async import AsyncSpawn
 from ptylink._errors import EOF as EOFError
-from ptylink._errors import ExitStatus, TetherError, Timeout
+from ptylink._errors import ExitStatus, PtylinkError, Timeout
 from ptylink._popen import PopenSpawn
 
 # Phase 2 — run, screen, interact

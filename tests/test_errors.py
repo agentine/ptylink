@@ -2,20 +2,20 @@
 
 import pytest
 
-from ptylink._errors import EOF, ExitStatus, TetherError, Timeout
+from ptylink._errors import EOF, ExitStatus, PtylinkError, Timeout
 from ptylink._types import EOF_TYPE, TIMEOUT_TYPE
 
 
-class TestTetherError:
+class TestPtylinkError:
     def test_base_exception(self) -> None:
-        err = TetherError("something broke")
+        err = PtylinkError("something broke")
         assert str(err) == "something broke"
         assert isinstance(err, Exception)
 
     def test_all_subclasses(self) -> None:
-        assert issubclass(Timeout, TetherError)
-        assert issubclass(EOF, TetherError)
-        assert issubclass(ExitStatus, TetherError)
+        assert issubclass(Timeout, PtylinkError)
+        assert issubclass(EOF, PtylinkError)
+        assert issubclass(ExitStatus, PtylinkError)
 
 
 class TestTimeout:
@@ -34,7 +34,7 @@ class TestTimeout:
         assert err.pattern == ""
 
     def test_is_tether_error(self) -> None:
-        with pytest.raises(TetherError):
+        with pytest.raises(PtylinkError):
             raise Timeout("test")
 
 
@@ -54,7 +54,7 @@ class TestEOF:
         assert err.before == ""
 
     def test_is_tether_error(self) -> None:
-        with pytest.raises(TetherError):
+        with pytest.raises(PtylinkError):
             raise EOF("test")
 
 
@@ -76,7 +76,7 @@ class TestExitStatus:
         assert str(err) == "died"
 
     def test_is_tether_error(self) -> None:
-        with pytest.raises(TetherError):
+        with pytest.raises(PtylinkError):
             raise ExitStatus(1)
 
 

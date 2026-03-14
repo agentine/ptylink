@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 
-class TetherError(Exception):
+class PtylinkError(Exception):
     """Base exception for all ptylink errors."""
 
 
-class Timeout(TetherError):
+class Timeout(PtylinkError):
     """Raised when an expect operation times out."""
 
     __slots__ = ("pattern",)
@@ -17,7 +17,7 @@ class Timeout(TetherError):
         super().__init__(msg or f"Timeout waiting for pattern: {pattern!r}")
 
 
-class EOF(TetherError):
+class EOF(PtylinkError):
     """Raised when the process closes its output (end of file on PTY)."""
 
     __slots__ = ("before",)
@@ -27,7 +27,7 @@ class EOF(TetherError):
         super().__init__(msg or "End of file (EOF). Process has closed output.")
 
 
-class ExitStatus(TetherError):
+class ExitStatus(PtylinkError):
     """Raised when the process exits with a non-zero status."""
 
     __slots__ = ("status", "signal")

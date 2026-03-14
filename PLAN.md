@@ -73,10 +73,10 @@ src/ptylink/
 ### 1. Exception Hierarchy (`_errors.py`)
 
 ```python
-class TetherError(Exception): ...          # Base
-class Timeout(TetherError): ...            # Expect timeout
-class EOF(TetherError): ...                # Process closed output
-class ExitStatus(TetherError):             # Process exited with error
+class PtylinkError(Exception): ...          # Base
+class Timeout(PtylinkError): ...           # Expect timeout
+class EOF(PtylinkError): ...               # Process closed output
+class ExitStatus(PtylinkError):            # Process exited with error
     status: int
     signal: int | None
 ```

@@ -230,12 +230,12 @@ class TestSpawnMatchAttributes:
 class TestSpawnPublicAPI:
     """Test the ptylink.spawn() convenience function."""
 
-    def test_tether_spawn(self) -> None:
+    def test_ptylink_spawn(self) -> None:
         with ptylink.spawn("echo api_test") as child:
             child.expect("api_test")
             assert child.after == "api_test"
 
-    def test_tether_spawn_with_encoding(self) -> None:
+    def test_ptylink_spawn_with_encoding(self) -> None:
         child = ptylink.spawn("echo utf8", encoding="utf-8")
         child.expect("utf8")
         child.close()

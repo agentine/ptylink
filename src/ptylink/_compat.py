@@ -19,7 +19,7 @@ from ptylink._errors import EOF as EOF  # noqa: PLC0414
 
 # Explicit exception aliases (pexpect compat names).
 from ptylink._errors import EOF as ExceptionEOF  # noqa: PLC0414
-from ptylink._errors import TetherError as ExceptionPexpect  # noqa: PLC0414
+from ptylink._errors import PtylinkError as ExceptionPexpect  # noqa: PLC0414
 from ptylink._errors import Timeout as ExceptionTimeout  # noqa: PLC0414
 from ptylink._errors import Timeout as TIMEOUT  # noqa: PLC0414
 
