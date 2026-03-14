@@ -227,7 +227,7 @@ class AsyncSpawn:
         if self._closed:
             return
         self._closed = True
-        self._proc.terminate(force=force)
+        await self.terminate(force=force)
         self._proc.close()
 
     async def terminate(self, force: bool = False) -> bool:
