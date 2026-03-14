@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from tether._ssh import SSHSession
+from ptylink._ssh import SSHSession
 
 
 class TestSSHSessionAPI:

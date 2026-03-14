@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from tether._popen import PopenSpawn
-from tether._types import EOF_TYPE
+from ptylink._popen import PopenSpawn
+from ptylink._types import EOF_TYPE
 
 
 class TestPopenSpawn:

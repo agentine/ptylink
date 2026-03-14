@@ -14,7 +14,7 @@ Initial release — modern drop-in replacement for pexpect.
 - Pattern matching: regex, exact string, EOF, TIMEOUT sentinels
 - `strip_ansi()` and `has_ansi()` ANSI escape handling
 - `interact()` standalone function with input/output filters
-- pexpect compatibility shim (`tether.compat`)
+- pexpect compatibility shim (`ptylink.compat`)
 - Zero dependencies
 - Full type annotations — `mypy --strict` + `pyright strict` clean
 - Python 3.10+

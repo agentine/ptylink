@@ -1,4 +1,4 @@
-"""Tests for tether._spawn — Spawn class integration tests.
+"""Tests for ptylink._spawn — Spawn class integration tests.
 
 These tests exercise real PTY processes (not mocks).
 """
@@ -8,10 +8,10 @@ import time
 
 import pytest
 
-import tether
-from tether import EOF_TYPE, TIMEOUT_TYPE, Spawn
-from tether._errors import EOF as EOFExc
-from tether._errors import Timeout as TimeoutExc
+import ptylink
+from ptylink import EOF_TYPE, TIMEOUT_TYPE, Spawn
+from ptylink._errors import EOF as EOFExc
+from ptylink._errors import Timeout as TimeoutExc
 
 
 class TestSpawnBasic:
@@ -228,15 +228,15 @@ class TestSpawnMatchAttributes:
 
 
 class TestSpawnPublicAPI:
-    """Test the tether.spawn() convenience function."""
+    """Test the ptylink.spawn() convenience function."""
 
     def test_tether_spawn(self) -> None:
-        with tether.spawn("echo api_test") as child:
+        with ptylink.spawn("echo api_test") as child:
             child.expect("api_test")
             assert child.after == "api_test"
 
     def test_tether_spawn_with_encoding(self) -> None:
-        child = tether.spawn("echo utf8", encoding="utf-8")
+        child = ptylink.spawn("echo utf8", encoding="utf-8")
         child.expect("utf8")
         child.close()
 

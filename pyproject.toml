@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "tether"
+name = "ptylink"
 version = "0.1.0"
 description = "Modern process interaction library — expect-style automation with PTY support"
 readme = "README.md"
@@ -27,12 +27,12 @@ classifiers = [
 keywords = ["pexpect", "expect", "pty", "terminal", "automation", "process"]
 
 [project.urls]
-Homepage = "https://github.com/agentine/tether"
-Repository = "https://github.com/agentine/tether"
-Issues = "https://github.com/agentine/tether/issues"
+Homepage = "https://github.com/agentine/ptylink"
+Repository = "https://github.com/agentine/ptylink"
+Issues = "https://github.com/agentine/ptylink/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/tether"]
+packages = ["src/ptylink"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "mypy>=1.8", "pyright>=1.1", "ruff>=0.3", "pexpect>=4.9.0"]
@@ -57,14 +57,14 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["SIM105", "SIM108", "SIM117", "B904"]  # test clarity over style
-"src/tether/_errors.py" = ["N818"]  # EOF/Timeout are not suffixed with Error (pexpect compat)
-"src/tether/__init__.py" = ["N801"]  # re-exports with pexpect-compat names
-"src/tether/_types.py" = ["N801", "E501"]  # EOF_TYPE/TIMEOUT_TYPE naming is intentional
-"src/tether/_pty.py" = ["SIM105"]  # try/except/pass for OS cleanup is clearer
-"src/tether/_popen.py" = ["SIM105", "SIM108"]  # try/except/pass for cleanup, if/else for clarity
-"src/tether/_spawn.py" = ["SIM108"]  # if/else for clarity
-"src/tether/_async.py" = ["SIM108"]  # if/else for clarity
-"src/tether/_ssh.py" = ["SIM105"]  # try/except/pass for cleanup
+"src/ptylink/_errors.py" = ["N818"]  # EOF/Timeout are not suffixed with Error (pexpect compat)
+"src/ptylink/__init__.py" = ["N801"]  # re-exports with pexpect-compat names
+"src/ptylink/_types.py" = ["N801", "E501"]  # EOF_TYPE/TIMEOUT_TYPE naming is intentional
+"src/ptylink/_pty.py" = ["SIM105"]  # try/except/pass for OS cleanup is clearer
+"src/ptylink/_popen.py" = ["SIM105", "SIM108"]  # try/except/pass for cleanup, if/else for clarity
+"src/ptylink/_spawn.py" = ["SIM108"]  # if/else for clarity
+"src/ptylink/_async.py" = ["SIM108"]  # if/else for clarity
+"src/ptylink/_ssh.py" = ["SIM105"]  # try/except/pass for cleanup
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

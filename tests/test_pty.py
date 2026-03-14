@@ -1,4 +1,4 @@
-"""Tests for tether._pty — PtyProcess class."""
+"""Tests for ptylink._pty — PtyProcess class."""
 
 import os
 import select
@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-from tether._pty import PtyProcess
+from ptylink._pty import PtyProcess
 
 
 class TestPtyProcessSpawn:

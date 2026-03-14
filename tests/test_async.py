@@ -6,8 +6,8 @@ import asyncio
 
 import pytest
 
-from tether._async import AsyncSpawn
-from tether._types import EOF_TYPE
+from ptylink._async import AsyncSpawn
+from ptylink._types import EOF_TYPE
 
 
 class TestAsyncSpawn:
@@ -108,8 +108,8 @@ class TestAsyncSpawn:
         assert asyncio.run(_run())
 
     def test_timeout(self) -> None:
-        """Timeout should raise tether.Timeout."""
-        from tether._errors import Timeout
+        """Timeout should raise ptylink.Timeout."""
+        from ptylink._errors import Timeout
 
         async def _run() -> None:
             async with AsyncSpawn("sleep 10") as child:

@@ -8,12 +8,12 @@ import shlex
 from collections import deque
 from typing import TYPE_CHECKING
 
-from tether._errors import EOF as EOFExc
-from tether._errors import ExitStatus
-from tether._errors import Timeout as TimeoutExc
-from tether._expect import compile_patterns
-from tether._pty import PtyProcess
-from tether._types import CompiledPattern, Pattern
+from ptylink._errors import EOF as EOFExc
+from ptylink._errors import ExitStatus
+from ptylink._errors import Timeout as TimeoutExc
+from ptylink._expect import compile_patterns
+from ptylink._pty import PtyProcess
+from ptylink._types import CompiledPattern, Pattern
 
 if TYPE_CHECKING:
     from types import TracebackType

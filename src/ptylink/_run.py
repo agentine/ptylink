@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from tether._errors import EOF, Timeout
-from tether._spawn import Spawn
-from tether._types import EOF_TYPE
+from ptylink._errors import EOF, Timeout
+from ptylink._spawn import Spawn
+from ptylink._types import EOF_TYPE
 
 
 def run(

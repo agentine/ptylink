@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
-from tether._errors import EOF as EOFExc
-from tether._errors import Timeout as TimeoutExc
-from tether._spawn import Spawn
+from ptylink._errors import EOF as EOFExc
+from ptylink._errors import Timeout as TimeoutExc
+from ptylink._spawn import Spawn
 
 if TYPE_CHECKING:
     from types import TracebackType

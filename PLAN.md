@@ -1,7 +1,7 @@
-# tether — Implementation Plan
+# ptylink — Implementation Plan
 
 **Target:** Replace `pexpect` (pexpect/pexpect)
-**Package name:** `tether` (verified available on PyPI 2026-03-13)
+**Package name:** `ptylink` (verified available on PyPI 2026-03-13)
 **License:** ISC
 **Python:** >= 3.10
 **Dependencies:** Zero (pure Python, PTY handling built-in)
@@ -41,7 +41,7 @@ Modern process interaction library for controlling interactive CLI programs:
 ## Architecture Overview
 
 ```
-src/tether/
+src/ptylink/
 ├── __init__.py          # Public API exports
 ├── py.typed             # PEP 561 marker
 ├── _types.py            # Type aliases, protocols, sentinel types
@@ -60,10 +60,10 @@ src/tether/
 
 ### Key Design Decisions
 
-- **Private modules, public API via `__init__.py`** — all internal modules prefixed with `_`, public surface is `tether.spawn()`, `tether.run()`, `tether.Spawn`, etc.
+- **Private modules, public API via `__init__.py`** — all internal modules prefixed with `_`, public surface is `ptylink.spawn()`, `ptylink.run()`, `ptylink.Spawn`, etc.
 - **Async-first internals** — core I/O uses asyncio; sync API wraps async with `asyncio.run()` / event loop
 - **Built-in PTY** — PTY handling built directly into the library (no ptyprocess dependency)
-- **Context manager support** — `with tether.spawn("cmd") as child:` for automatic cleanup
+- **Context manager support** — `with ptylink.spawn("cmd") as child:` for automatic cleanup
 - **Compiled patterns** — expect patterns compiled once and reused
 - **Sentinel types** — `EOF` and `TIMEOUT` are proper singleton types, not magic integers
 - **Modern Python** — 3.10+ required; uses match statements, `|` union types, slots
@@ -81,7 +81,7 @@ class ExitStatus(TetherError):             # Process exited with error
     signal: int | None
 ```
 
-**Fix over pexpect:** Clear exception types with proper attributes. pexpect EOF/TIMEOUT are exception classes AND sentinel values — tether separates these concerns.
+**Fix over pexpect:** Clear exception types with proper attributes. pexpect EOF/TIMEOUT are exception classes AND sentinel values — ptylink separates these concerns.
 
 ### 2. PTY Management (`_pty.py`)
 
@@ -189,9 +189,9 @@ class PopenSpawn:
 Drop-in replacement for code using `import pexpect`:
 
 ```python
-# tether.compat provides all pexpect public names
-from tether.compat import spawn, run, EOF, TIMEOUT
-from tether.compat import pxssh  # maps to tether.SSHSession
+# ptylink.compat provides all pexpect public names
+from ptylink.compat import spawn, run, EOF, TIMEOUT
+from ptylink.compat import pxssh  # maps to ptylink.SSHSession
 ```
 
 ## Phases
@@ -225,7 +225,7 @@ from tether.compat import pxssh  # maps to tether.SSHSession
 
 ### Phase 4: Quality & Compatibility
 - pexpect compatibility shim
-- Cross-verification tests (run same scenarios with pexpect and tether)
+- Cross-verification tests (run same scenarios with pexpect and ptylink)
 - mypy --strict and pyright clean
 - Benchmarks vs pexpect
 - CI (GitHub Actions: Python 3.10, 3.11, 3.12, 3.13, ubuntu + macos)
@@ -239,7 +239,7 @@ from tether.compat import pxssh  # maps to tether.SSHSession
 
 ## Deliverables
 
-- `projects/tether/` — complete Python package
+- `projects/ptylink/` — complete Python package
 - Process spawning with PTY allocation
 - Expect-style pattern matching on process output
 - Native async/await support
@@ -254,12 +254,12 @@ from tether.compat import pxssh  # maps to tether.SSHSession
 
 ## Success Criteria
 
-- `tether.spawn("python3")` spawns process with PTY, expect/send works
+- `ptylink.spawn("python3")` spawns process with PTY, expect/send works
 - `child.expect(r">>> ")` matches Python REPL prompt
 - `child.sendline("print('hello')")` sends input correctly
 - `child.before` contains output without leaked input (#821 fix)
-- `async with tether.AsyncSpawn("cmd") as child:` works with native async
-- `with tether.spawn("cmd") as child:` auto-cleans up on exit
+- `async with ptylink.AsyncSpawn("cmd") as child:` works with native async
+- `with ptylink.spawn("cmd") as child:` auto-cleans up on exit
 - No Python 3.12+ fork warnings (#817)
 - mypy --strict passes with zero errors
 - pytest passes on Python 3.10, 3.11, 3.12, 3.13

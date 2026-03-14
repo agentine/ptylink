@@ -12,10 +12,10 @@ import tty
 from collections import deque
 from typing import TYPE_CHECKING
 
-from tether._errors import ExitStatus
-from tether._expect import compile_pattern, compile_patterns, expect_loop
-from tether._pty import PtyProcess
-from tether._types import Pattern
+from ptylink._errors import ExitStatus
+from ptylink._expect import compile_pattern, compile_patterns, expect_loop
+from ptylink._pty import PtyProcess
+from ptylink._types import Pattern
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 class Spawn:
     """Control an interactive process via a pseudo-terminal.
 
-    The primary user-facing API for tether. Spawns a child process in a PTY
+    The primary user-facing API for ptylink. Spawns a child process in a PTY
     and provides expect-style pattern matching on its output.
 
     Example::

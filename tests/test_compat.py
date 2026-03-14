@@ -6,8 +6,8 @@ import pytest
 
 pexpect = pytest.importorskip("pexpect")
 
-import tether.compat as tether_compat  # noqa: E402
-from tether._spawn import Spawn  # noqa: E402
+import ptylink.compat as tether_compat  # noqa: E402
+from ptylink._spawn import Spawn  # noqa: E402
 
 
 class TestCompatImports:
@@ -44,7 +44,7 @@ class TestCompatImports:
 
 
 class TestCrossVerification:
-    """Cross-verify tether vs pexpect for identical scenarios."""
+    """Cross-verify ptylink vs pexpect for identical scenarios."""
 
     def test_echo_expect(self) -> None:
         """Both should match 'hello' from echo."""
@@ -54,7 +54,7 @@ class TestCrossVerification:
         p_after = p_child.after.decode() if isinstance(p_child.after, bytes) else p_child.after
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("echo hello") as t_child:
             t_child.expect("hello")
             t_after = t_child.after
@@ -70,7 +70,7 @@ class TestCrossVerification:
         p_child.expect("got: hello")
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("python3 -c \"x=input(); print('got:',x)\"") as t_child:
             t_child.sendline("hello")
             t_child.expect("got: hello")
@@ -96,7 +96,7 @@ class TestCrossVerification:
         p_idx = p_child.expect(["b", "a"])
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("echo 'aXXXbYYY'") as t_child:
             t_idx = t_child.expect_list(["b", "a"])
 
@@ -112,7 +112,7 @@ class TestCrossVerification:
         p_before = p_child.before.decode() if isinstance(p_child.before, bytes) else p_child.before
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("echo 'before_text:match_text'") as t_child:
             t_child.expect("match_text")
             t_before = t_child.before
@@ -132,7 +132,7 @@ class TestCrossVerification:
         assert not p_child.isalive()
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("cat") as t_child:
             time.sleep(0.2)
             t_child.sendcontrol("c")
@@ -149,8 +149,8 @@ class TestCrossVerification:
         p_idx = p_child.expect([pexpect.EOF])
         p_child.close()
 
-        # tether
-        from tether._types import EOF_TYPE
+        # ptylink
+        from ptylink._types import EOF_TYPE
 
         with Spawn("echo done") as t_child:
             t_child.expect("done")
@@ -166,12 +166,12 @@ class TestCrossVerification:
         p_child.expect("ctx")
         p_child.close()
 
-        # tether
+        # ptylink
         with Spawn("echo ctx") as t_child:
             t_child.expect("ctx")
 
     def test_run_with_events(self) -> None:
-        """tether.run with events should work like pexpect.run."""
+        """ptylink.run with events should work like pexpect.run."""
         t_result = tether_compat.run(
             "sh -c 'echo Question?; read ans; echo Answer: $ans'",
             events={"Question?": "yes\n"},

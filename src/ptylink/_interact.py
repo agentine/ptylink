@@ -11,7 +11,7 @@ from collections.abc import Callable
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from tether._spawn import Spawn
+    from ptylink._spawn import Spawn
 
 
 def interact(

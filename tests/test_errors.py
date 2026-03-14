@@ -1,9 +1,9 @@
-"""Tests for tether._errors — exception hierarchy."""
+"""Tests for ptylink._errors — exception hierarchy."""
 
 import pytest
 
-from tether._errors import EOF, ExitStatus, TetherError, Timeout
-from tether._types import EOF_TYPE, TIMEOUT_TYPE
+from ptylink._errors import EOF, ExitStatus, TetherError, Timeout
+from ptylink._types import EOF_TYPE, TIMEOUT_TYPE
 
 
 class TestTetherError:
@@ -98,15 +98,15 @@ class TestSentinels:
         assert repr(TIMEOUT_TYPE()) == "TIMEOUT"
 
     def test_isinstance(self) -> None:
-        from tether._types import EOF as eof_sentinel
-        from tether._types import TIMEOUT as timeout_sentinel
+        from ptylink._types import EOF as eof_sentinel
+        from ptylink._types import TIMEOUT as timeout_sentinel
 
         assert isinstance(eof_sentinel, EOF_TYPE)
         assert isinstance(timeout_sentinel, TIMEOUT_TYPE)
 
     def test_sentinels_are_distinct_from_exceptions(self) -> None:
         """EOF sentinel and EOF exception are different types."""
-        from tether._types import EOF as eof_sentinel
+        from ptylink._types import EOF as eof_sentinel
 
         assert not isinstance(eof_sentinel, EOF)
         assert not isinstance(eof_sentinel, Exception)

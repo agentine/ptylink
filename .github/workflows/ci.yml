@@ -32,9 +32,9 @@ jobs:
       - name: Install dependencies
         run: uv sync --dev
       - name: mypy --strict
-        run: uv run mypy --strict src/tether/
+        run: uv run mypy --strict src/ptylink/
       - name: pyright
-        run: uv run pyright src/tether/
+        run: uv run pyright src/ptylink/
 
   lint:
     runs-on: ubuntu-latest

@@ -8,9 +8,9 @@ import time
 from collections import deque
 from collections.abc import Callable
 
-from tether._errors import EOF as EOFExc
-from tether._errors import Timeout as TimeoutExc
-from tether._types import EOF_TYPE, TIMEOUT_TYPE, CompiledPattern, Pattern
+from ptylink._errors import EOF as EOFExc
+from ptylink._errors import Timeout as TimeoutExc
+from ptylink._types import EOF_TYPE, TIMEOUT_TYPE, CompiledPattern, Pattern
 
 # Result type from expect_loop.
 ExpectResult = tuple[int, str, str, re.Match[str] | str | None]
@@ -20,8 +20,8 @@ def compile_pattern(pattern: Pattern) -> CompiledPattern:
     """Compile a single pattern into a ``CompiledPattern``.
 
     Accepts both the sentinel types (``EOF_TYPE``, ``TIMEOUT_TYPE``) and
-    the exception classes (``tether._errors.EOF``, ``tether._errors.Timeout``)
-    so that ``import tether.compat as pexpect; child.expect(pexpect.EOF)``
+    the exception classes (``ptylink._errors.EOF``, ``ptylink._errors.Timeout``)
+    so that ``import ptylink.compat as pexpect; child.expect(pexpect.EOF)``
     works correctly.
     """
     if pattern is EOF_TYPE or pattern is EOFExc:
@@ -154,7 +154,7 @@ def _on_eof(
     patterns: list[CompiledPattern],
     buffer: deque[str],
 ) -> ExpectResult:
-    """Handle EOF. Return EOF pattern result or raise ``tether.EOF``."""
+    """Handle EOF. Return EOF pattern result or raise ``ptylink.EOF``."""
     for i, pat in enumerate(patterns):
         if pat.is_eof:
             if incoming:
@@ -168,7 +168,7 @@ def _on_timeout(
     patterns: list[CompiledPattern],
     buffer: deque[str],
 ) -> ExpectResult:
-    """Handle timeout. Return TIMEOUT pattern result or raise ``tether.Timeout``."""
+    """Handle timeout. Return TIMEOUT pattern result or raise ``ptylink.Timeout``."""
     for i, pat in enumerate(patterns):
         if pat.is_timeout:
             if incoming:

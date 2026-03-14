@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tether._run import run
+from ptylink._run import run
 
 
 class TestRun:

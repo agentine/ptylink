@@ -1,10 +1,10 @@
-"""Exception hierarchy for tether."""
+"""Exception hierarchy for ptylink."""
 
 from __future__ import annotations
 
 
 class TetherError(Exception):
-    """Base exception for all tether errors."""
+    """Base exception for all ptylink errors."""
 
 
 class Timeout(TetherError):

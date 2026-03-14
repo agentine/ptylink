@@ -1,4 +1,4 @@
-"""Sentinel types and type aliases for tether."""
+"""Sentinel types and type aliases for ptylink."""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from tether._errors import EOF as EOFExc
-    from tether._errors import Timeout as TimeoutExc
+    from ptylink._errors import EOF as EOFExc
+    from ptylink._errors import Timeout as TimeoutExc
 
 
 class EOF_TYPE:
     """Singleton sentinel for EOF in pattern lists.
 
-    Distinct from the EOF *exception* in _errors.py. Use ``tether.EOF`` (the
+    Distinct from the EOF *exception* in _errors.py. Use ``ptylink.EOF`` (the
     singleton instance) in expect pattern lists to match end-of-file without
     raising an exception.
     """
@@ -37,7 +37,7 @@ class TIMEOUT_TYPE:
     """Singleton sentinel for TIMEOUT in pattern lists.
 
     Distinct from the Timeout *exception* in _errors.py. Use
-    ``tether.TIMEOUT`` in expect pattern lists to match timeout without
+    ``ptylink.TIMEOUT`` in expect pattern lists to match timeout without
     raising an exception.
     """
 

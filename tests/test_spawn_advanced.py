@@ -5,8 +5,8 @@ from __future__ import annotations
 import re
 import time
 
-from tether._spawn import Spawn
-from tether._types import EOF_TYPE
+from ptylink._spawn import Spawn
+from ptylink._types import EOF_TYPE
 
 
 class TestExpectListOrdering:
@@ -59,6 +59,6 @@ class TestSetwinsize:
 class TestInteractModule:
     def test_interact_import(self) -> None:
         """interact function should be importable."""
-        from tether._interact import interact
+        from ptylink._interact import interact
 
         assert callable(interact)

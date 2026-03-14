@@ -1,16 +1,16 @@
-# tether
+# ptylink
 
-[![CI](https://github.com/agentine/tether/actions/workflows/ci.yml/badge.svg)](https://github.com/agentine/tether/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/tether)](https://pypi.org/project/tether/)
-[![Python](https://img.shields.io/pypi/pyversions/tether)](https://pypi.org/project/tether/)
+[![CI](https://github.com/agentine/ptylink/actions/workflows/ci.yml/badge.svg)](https://github.com/agentine/ptylink/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/ptylink)](https://pypi.org/project/ptylink/)
+[![Python](https://img.shields.io/pypi/pyversions/ptylink)](https://pypi.org/project/ptylink/)
 
 Modern process interaction library for Python — expect-style automation with PTY support.
 
 Drop-in replacement for [pexpect](https://github.com/pexpect/pexpect) with full type annotations, native async/await, and zero dependencies.
 
-## Why tether?
+## Why ptylink?
 
-| | pexpect | tether |
+| | pexpect | ptylink |
 |---|---|---|
 | **Type annotations** | No | Full (`mypy --strict` + `pyright strict`) |
 | **Async support** | Deprecated `@asyncio.coroutine` | Native `async/await` via `AsyncSpawn` |
@@ -22,7 +22,7 @@ Drop-in replacement for [pexpect](https://github.com/pexpect/pexpect) with full 
 ## Installation
 
 ```bash
-pip install tether
+pip install ptylink
 ```
 
 Requires Python 3.10+.
@@ -30,9 +30,9 @@ Requires Python 3.10+.
 ## Quick Start
 
 ```python
-import tether
+import ptylink
 
-with tether.spawn("python3") as child:
+with ptylink.spawn("python3") as child:
     child.expect(">>> ")
     child.sendline("print(42)")
     child.expect("42")
@@ -42,7 +42,7 @@ with tether.spawn("python3") as child:
 ## Context Manager
 
 ```python
-from tether import Spawn
+from ptylink import Spawn
 
 with Spawn("ssh user@host") as child:
     child.expect("password:")
@@ -57,7 +57,7 @@ with Spawn("ssh user@host") as child:
 
 ```python
 import asyncio
-from tether import AsyncSpawn
+from ptylink import AsyncSpawn
 
 async def main():
     async with AsyncSpawn("python3") as child:
@@ -73,7 +73,7 @@ asyncio.run(main())
 For environments without PTY support (e.g. Windows):
 
 ```python
-from tether import PopenSpawn
+from ptylink import PopenSpawn
 
 with PopenSpawn("echo hello") as child:
     child.expect("hello")
@@ -82,7 +82,7 @@ with PopenSpawn("echo hello") as child:
 ## High-Level `run()`
 
 ```python
-from tether import run
+from ptylink import run
 
 # Simple command
 output = run("ls -la")
@@ -100,7 +100,7 @@ output = run(
 ## SSH Sessions
 
 ```python
-from tether import SSHSession
+from ptylink import SSHSession
 
 with SSHSession("server.example.com", username="admin") as ssh:
     ssh.login(password="secret")
@@ -112,7 +112,7 @@ with SSHSession("server.example.com", username="admin") as ssh:
 
 ```python
 import re
-from tether import Spawn, EOF_TYPE, TIMEOUT_TYPE
+from ptylink import Spawn, EOF_TYPE, TIMEOUT_TYPE
 
 with Spawn("some_program") as child:
     # String patterns (auto-escaped)
@@ -181,7 +181,7 @@ with Spawn("some_program") as child:
 ## ANSI Utilities
 
 ```python
-from tether import strip_ansi, has_ansi
+from ptylink import strip_ansi, has_ansi
 
 clean = strip_ansi("\x1b[31mred text\x1b[0m")  # "red text"
 has_ansi("\x1b[1mbold\x1b[0m")  # True
@@ -196,21 +196,21 @@ has_ansi("\x1b[1mbold\x1b[0m")  # True
 import pexpect
 
 # After — just change the import
-import tether.compat as pexpect
+import ptylink.compat as pexpect
 ```
 
 All pexpect names are available: `spawn`, `run`, `EOF`, `TIMEOUT`, `pxssh`.
 
 ### Manual Migration
 
-| pexpect | tether |
+| pexpect | ptylink |
 |---------|--------|
-| `pexpect.spawn(cmd)` | `tether.Spawn(cmd)` |
-| `pexpect.run(cmd)` | `tether.run(cmd)` |
-| `pexpect.EOF` | `tether.EOF_TYPE` |
-| `pexpect.TIMEOUT` | `tether.TIMEOUT_TYPE` |
-| `pexpect.pxssh.pxssh()` | `tether.SSHSession()` |
-| `pexpect.spawn(cmd, async_=True)` | `tether.AsyncSpawn(cmd)` |
+| `pexpect.spawn(cmd)` | `ptylink.Spawn(cmd)` |
+| `pexpect.run(cmd)` | `ptylink.run(cmd)` |
+| `pexpect.EOF` | `ptylink.EOF_TYPE` |
+| `pexpect.TIMEOUT` | `ptylink.TIMEOUT_TYPE` |
+| `pexpect.pxssh.pxssh()` | `ptylink.SSHSession()` |
+| `pexpect.spawn(cmd, async_=True)` | `ptylink.AsyncSpawn(cmd)` |
 
 ### Breaking Changes
 
@@ -226,11 +226,11 @@ All pexpect names are available: `spawn`, `run`, `EOF`, `TIMEOUT`, `pxssh`.
 
 ## Benchmarks
 
-| Operation | tether (µs/op) | pexpect (µs/op) | Speedup |
+| Operation | ptylink (us/op) | pexpect (us/op) | Speedup |
 |-----------|---------------:|----------------:|--------:|
-| spawn+expect (echo) | 3,002 | 285,821 | 95× |
-| spawn+expect (python) | 84,312 | 307,303 | 3.6× |
-| run (echo) | 3,352 | 163,946 | 49× |
+| spawn+expect (echo) | 3,002 | 285,821 | 95x |
+| spawn+expect (python) | 84,312 | 307,303 | 3.6x |
+| run (echo) | 3,352 | 163,946 | 49x |
 
 ## License
 

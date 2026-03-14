@@ -1,18 +1,18 @@
-"""Tests for tether._expect — pattern matching engine."""
+"""Tests for ptylink._expect — pattern matching engine."""
 
 import re
 from collections import deque
 
 import pytest
 
-from tether._errors import EOF as EOFExc
-from tether._errors import Timeout as TimeoutExc
-from tether._expect import (
+from ptylink._errors import EOF as EOFExc
+from ptylink._errors import Timeout as TimeoutExc
+from ptylink._expect import (
     compile_pattern,
     compile_patterns,
     expect_loop,
 )
-from tether._types import EOF_TYPE, TIMEOUT_TYPE
+from ptylink._types import EOF_TYPE, TIMEOUT_TYPE
 
 
 class TestCompilePattern:
